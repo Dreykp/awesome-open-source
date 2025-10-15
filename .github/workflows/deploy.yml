@@ -3,19 +3,15 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Запускати при пуші в гілку `main`
   push:
     branches: [ main ]
-  # Дозволяє запускати цей воркфлоу вручну зі вкладки Actions
   workflow_dispatch:
 
-# Встановлюємо дозволи для GITHUB_TOKEN для розгортання на GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Дозволяємо тільки одне одночасне розгортання, скасовуючи попередні
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -29,21 +25,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # ---- ЗМІНА 1: Встановлюємо pnpm ----
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8 # Можете вказати бажану версію pnpm
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # Вкажіть вашу версію Node.js
-          cache: 'npm'
+          node-version: 20
+          # ---- ЗМІНА 2: Вказуємо кешування для pnpm ----
+          cache: 'pnpm'
+
+      # ---- ЗМІНА 3: Використовуємо команди pnpm ----
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       - name: Build
-        run: npm run build
+        run: pnpm run build
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Завантажити папку dist
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
