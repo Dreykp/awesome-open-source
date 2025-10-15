@@ -8,30 +8,24 @@ export default defineConfig({
     base: '/awesome-open-source',
     integrations: [
         starlight({
-            title: 'Awesome open source',
-            defaultLocale: 'en',
+            title: 'Open Source Compass',
+            defaultLocale: 'uk',
             locales: {
-                en: {label: 'English'},
-                uk: {label: 'Українська'}
+                // en: {label: 'English'},
+                uk: {label: '🇺🇦'}
             },
-            social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+            social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Dreykp/awesome-open-source' }],
             sidebar: [
-                // 👇 ОСЬ НОВИЙ БЛОК ДЛЯ ВАШОГО КАТАЛОГУ
                 {
-                    label: 'Каталог Додатків', // Назва секції в меню
-                    autogenerate: { directory: 'apps' }, // Автоматично генерувати меню з папки 'apps'
-                },
-                // ЦЕ ЗАЛИШКОВІ БЛОКИ, ЇХ МОЖНА ВИДАЛИТИ АБО ЗАЛИШИТИ
-                {
-                    label: 'Guides',
-                    items: [
-                        // Each item here is one entry in the navigation menu.
-                        { label: 'Example Guide', slug: 'guides/example' },
-                    ],
+                    label: 'Інструкції',
+                    autogenerate: { directory: 'guides' },
                 },
                 {
-                    label: 'Reference',
-                    autogenerate: { directory: 'reference' },
+                    label: 'Сервіси',
+                    autogenerate: { directory: 'self-hosted-services' },
+                },{
+                    label: 'Додатки',
+                    autogenerate: { directory: 'desktop-and-mobile' },
                 },
             ],
         }),
