@@ -1,0 +1,63 @@
+.hero {
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #5d5fef, #40b1e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 50ch;
+  color: var(--sl-color-gray-3);
+}
+
+.hero code {
+  color: var(--sl-color-accent);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.action {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.action.primary {
+  background-color: var(--sl-color-accent);
+  color: var(--sl-color-white);
+}
+
+.action.primary:hover {
+  transform: scale(1.05);
+}
+
+.action.secondary {
+  background-color: var(--sl-color-gray-5);
+  color: var(--sl-color-white);
+}
+
+.action.secondary:hover {
+  background-color: var(--sl-color-gray-4);
+  transform: scale(1.05);
+}
