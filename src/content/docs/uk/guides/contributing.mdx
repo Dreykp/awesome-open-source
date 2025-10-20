@@ -17,12 +17,12 @@ import { Aside, FileTree } from '@astrojs/starlight/components';
 
 Перш за все, вам потрібно створити власну копію (fork) нашого репозиторію та завантажити її на свій комп'ютер.
 
-1.  **Fork Репозиторію**: Перейдіть на сторінку нашого [GitHub репозиторію](https://github.com/your-username/your-repo-name) (замініть на ваше посилання) та натисніть кнопку **Fork** у правому верхньому куті. Це створить копію проєкту у вашому GitHub-акаунті.
+1.  **Fork Репозиторію**: Перейдіть на сторінку нашого [GitHub репозиторію](https://github.com/Dreykp/awesome-open-source) та натисніть кнопку **Fork** у правому верхньому куті. Це створить копію проєкту у вашому GitHub-акаунті.
 
-2.  **Clone Вашого Fork'у**: Відкрийте термінал і виконайте команду, щоб завантажити вашу копію репозиторію. Замініть `YOUR-USERNAME` на ваш нікнейм на GitHub.
+2.  **Clone Вашого Fork'у**: Відкрийте термінал і виконайте команду, щоб завантажити вашу копію репозиторію.
     ```bash
-    git clone [https://github.com/YOUR-USERNAME/your-repo-name.git](https://github.com/YOUR-USERNAME/your-repo-name.git)
-    cd your-repo-name
+    git clone https://github.com/Dreykp/awesome-open-source.git
+    cd awesome-open-source
     ```
 
 3.  **Створіть Нову Гілку (Branch)**: Завжди створюйте нову гілку для ваших змін. Це ізолює вашу роботу та спрощує процес злиття. Назвіть гілку описово, наприклад, `add/назва-проєкту`.
@@ -34,30 +34,34 @@ import { Aside, FileTree } from '@astrojs/starlight/components';
 
 Тепер найцікавіше — додавання файлів вашого проєкту.
 
-### 1. Додайте скріншот
+### 1. Додайте скріншоти
 
-Зробіть якісний та інформативний скріншот інтерфейсу програми.
+Зробіть якісні та інформативні скріншоти інтерфейсу програми чи сервісу.
+Створіть теку з назвою проєкту
 
 -   **Формат**: `.png` або `.webp`.
--   **Назва файлу**: така ж, як і в файлу проєкту (наприклад, `cool-project-name.png`).
--   **Розмістіть його у папці**: `public/assets/screenshots/`.
+-   **Назва файлу**: нумерація починаючи з 0.
+-   **Розмістіть їх у теці**: `public/assets/screenshots/project_name`.
 
 <FileTree>
 - public/
   - assets/
     - **screenshots/**
-      - **cool-project-name.png** &lt;-- Ваш скріншот тут
+      - **project_name** &lt;-- Ваші скріншоти тут
+        - **0.png**
+        - **1.png**
+        - **2.png**
 </FileTree>
 
 ### 2. Створіть MDX файл проєкту
 
-Створіть новий `.mdx` файл у директорії `src/content/docs/projects/`. Назва файлу має бути короткою, на латиниці, і відповідати назві проєкту.
+Створіть новий `.mdx` файл у директорії `src/content/docs/your_lang/project_name`. Назва файлу має бути короткою, на латиниці, і відповідати назві проєкту.
 
 <FileTree>
 - src/
   - content/
     - docs/
-      - **projects/**
+      - **your_lang/**
         - **cool-project-name.mdx** &lt;-- Ваш файл тут
 </FileTree>
 

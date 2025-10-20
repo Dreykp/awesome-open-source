@@ -1,0 +1,42 @@
+---
+title: Ласкаво просимо до Каталогу
+description: Огляд структури та вмісту "Open Source Compass".
+---
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Ваш навігатор у світі self-hosted та open-source рішень. Ми зібрали,
+категоризували та детально описали найкращі інструменти, щоб ви могли
+легко знайти те, що вам потрібно.
+
+Каталог розділено на три основні секції для вашої зручності:
+
+<CardGrid stagger>
+    <Card title="Сервіси (Self-Hosted)" icon="seti:docker">
+        Все, що ви можете запустити на власному сервері. Від медіа-серверів
+        та менеджерів паролів до інструментів моніторингу та автоматизації.
+        <br/><br/>
+        <a href="/awesome-open-source/uk/self-hosted-services/">
+            → Переглянути всі сервіси
+        </a>
+    </Card>
+
+    <Card title="Додатки (Desktop & Mobile)" icon="laptop">
+        Корисні open-source програми для ваших комп'ютерів (Windows, macOS, Linux)
+        та мобільних пристроїв. Термінали, редактори коду, нотатки та інше.
+        <br/><br/>
+        <a href="/awesome-open-source/uk/desktop-and-mobile/">
+            → Переглянути всі додатки
+        </a>
+    </Card>
+
+    <Card title="Інструкції" icon="document">
+        Покрокові посібники та корисні поради щодо налаштування, керування
+        та використання програмного забезпечення, представленого в каталозі.
+        <br/><br/>
+        <a href="/awesome-open-source/uk/guides/contributing/">
+            → Як додати свій проєкт
+        </a>
+    </Card>
+</CardGrid>
+
+---

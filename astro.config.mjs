@@ -15,6 +15,7 @@ export default defineConfig({
                 uk: {label: '🇺🇦'}
             },
             social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Dreykp/awesome-open-source' }],
+            customCss: ['./src/styles/custom.css'],
             sidebar: [
                 {
                     label: 'Інструкції',

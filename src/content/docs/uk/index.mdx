@@ -9,22 +9,18 @@ template: splash
 hero:
   tagline: Ваш навігатор у всесвіті self-hosted та open-source рішень.
   image:
-    # Замініть `houston.webp` на власне зображення, наприклад, логотип
     file: ../../../assets/logo.png
   actions:
     - text: Переглянути каталог
-      # Вкажіть тут посилання на головну сторінку каталогу
-      link: guides/contributing/
+      link: catalog/structure
       icon: right-arrow
       variant: primary
-    - text: Додати свій проєкт
-      # Вкажіть посилання на інструкцію для контриб'юторів
-      link: /guides/contributing/
+    - text: Доповнити каталог
+      link: https://github.com/Dreykp/awesome-open-source/fork
       icon: add-document
-      variant: minimal
+      variant: secondary
 
 # --- Cards Section ---
-# Блок з картками, що висвітлюють ключові особливості сайту.
 
 ---
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -38,7 +34,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     <Card title="Скріншоти та демо" icon="seti:image">
         Оцініть інтерфейс та функціонал ще до встановлення завдяки актуальним скріншотам для кожного програмного забезпечення.
     </Card>
-    <Card title="Зручний пошук і фільтри" icon="seti:code-search">
+    <Card title="Зручний пошук" icon="seti:code-search">
         Швидко знаходьте потрібні інструменти за допомогою категорій та потужного повнотекстового пошуку.
     </Card>
     <Card title="Керується спільнотою" icon="seti:favicon">

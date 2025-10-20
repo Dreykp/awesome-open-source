@@ -1,0 +1,142 @@
+---
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+    images: (ImageMetadata | string)[];
+}
+const { images } = Astro.props;
+
+const sliderId = `swiper-${Math.random().toString(36).substring(7)}`;
+---
+
+<link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.css"
+/>
+
+<div class={`swiper mySwiper ${sliderId}`}>
+    <div class="swiper-wrapper">
+        {images.map((image, index) => (
+                <div class="swiper-slide">
+                    {typeof image === 'object' && image.width && image.height ? (
+                            <a
+                                    href={image.src}
+                                    class="photoswipe-trigger"
+                                    data-pswp-src={image.src}
+                                    data-pswp-width={image.width}
+                                    data-pswp-height={image.height}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    data-index={index}
+                            >
+                                <img src={image.src} alt={`Slider image ${index + 1}`} loading="lazy" />
+                            </a>
+                    ) : (
+          <img src={typeof image === 'object' ? image.src : image} alt="Slider image" loading="lazy" />
+                    )}
+                </div>
+        ))}
+    </div>
+
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script is:inline define:vars={{ sliderSelector: `.${sliderId}` }}>
+    var swiper = new Swiper(sliderSelector, {
+        loop: true,
+        pagination: {
+            el: `${sliderSelector} .swiper-pagination`,
+            clickable: true,
+        },
+        navigation: {
+            nextEl: `${sliderSelector} .swiper-button-next`,
+            prevEl: `${sliderSelector} .swiper-button-prev`,
+        },
+    });
+</script>
+
+<script type="module">
+    import PhotoSwipe from 'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.esm.js';
+
+    const allSliders = document.querySelectorAll('.mySwiper');
+
+    allSliders.forEach(sliderElement => {
+        sliderElement.addEventListener('click', (e) => {
+            const triggerLink = e.target.closest('a.photoswipe-trigger');
+            if (!triggerLink) {
+                return;
+            }
+            e.preventDefault();
+            const allLinksInThisSlider = sliderElement.querySelectorAll('a.photoswipe-trigger');
+            const dataSource = Array.from(allLinksInThisSlider).map(link => {
+                return {
+                    src: link.dataset.pswpSrc,
+                    width: parseInt(link.dataset.pswpWidth, 10),
+                    height: parseInt(link.dataset.pswpHeight, 10),
+                    alt: link.querySelector('img')?.alt || 'Image'
+                };
+            });
+            const clickedIndex = parseInt(triggerLink.dataset.index, 10);
+            const lightbox = new PhotoSwipe({
+                dataSource: dataSource,
+                index: clickedIndex,
+                pswpModule: PhotoSwipe,
+            });
+
+            lightbox.init();
+        });
+    });
+</script>
+
+<style>
+    .mySwiper {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        margin: 2rem 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #f9f9f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .swiper-slide a.photoswipe-trigger {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: zoom-in;
+    }
+    :root {
+        --pswp-icon-color: var(--sl-color-white);
+        --pswp-icon-color-secondary: var(--sl-color-gray-3);
+        --pswp-bg: rgba(0, 0, 0, 0.85);
+        --pswp-icon-stroke-color: var(--sl-color-black);
+        --pswp-icon-stroke-width: 1.5px;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: var(--sl-color-accent);
+    }
+    .swiper-pagination-bullet-active {
+        background: var(--sl-color-accent);
+    }
+</style>

@@ -1,0 +1,103 @@
+---
+title: Portainer
+description: Легкий веб-інтерфейс для керування Docker
+tags: ["API", "Auth", "v1"]
+links:
+    website: https://www.portainer.io/
+    github: https://github.com/portainer/portainer
+    docker: https://hub.docker.com/r/portainer/portainer-ce
+    docs: https://docs.portainer.io/
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+
+import screen0 from '../../../../../assets/screenshots/portainer/0.png';
+import screen1 from '../../../../../assets/screenshots/portainer/1.png';
+
+import ImageSlider from '../../../../../components/ImageSlider.astro';
+
+**Portainer Community Edition (CE)** — це потужний та легкий веб-інтерфейс з відкритим кодом, який дозволяє легко керувати вашими Docker-середовищами. Замість того, щоб вводити команди в терміналі, ви можете виконувати всі операції через **зручний графічний інтерфейс**.
+
+Це ідеальний інструмент як для початківців, так і для досвідчених користувачів Docker.
+
+<ImageSlider images={[screen0, screen1]} />
+---
+
+## Основні можливості
+
+* Керування контейнерами, образами, томами (**volumes**) та мережами.
+* Швидкий розгортання додатків за допомогою шаблонів (**App Templates**).
+* Перегляд логів та доступ до консолі контейнера прямо з браузера.
+* Керування кількома Docker-хостами з одного інтерфейсу.
+
+---
+
+## Конфігурація: docker-compose.yml
+
+Це базовий та найнадійніший спосіб розгорнути Portainer. Він використовує іменований том для зберігання даних та підключається до сокету Docker на хост-машині.
+
+```yml
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      # 9443 - порт для доступу до веб-інтерфейсу через HTTPS
+      # 8000 - старий порт, залишений для сумісності з агентами
+      - "9443:9443"
+      - "8000:8000"
+    volumes:
+      # Підключаємо сокет Docker, щоб Portainer міг керувати контейнерами
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Створюємо іменований том для зберігання налаштувань Portainer
+      - portainer_data:/data
+    restart: unless-stopped
+
+# Оголошуємо іменований том
+volumes:
+  portainer_data:
+```
+
+---
+
+## Покрокова інструкція із запуску
+
+<Steps>
+1.  **Створіть папку для проєкту:**
+
+    ```bash
+    mkdir portainer_project && cd portainer_project
+    ```
+
+2.  **Створіть файл `docker-compose.yml`:**
+
+    ```bash
+    nano docker-compose.yml
+    ```
+
+3.  **Скопіюйте та вставте** наведений вище код у цей файл. Збережіть (`Ctrl+O`) та закрийте редактор (`Ctrl+X`).
+
+4.  **Запустіть Portainer:**
+
+    ```bash
+    docker compose up -d
+    ```
+
+</Steps>
+
+---
+
+## Перший вхід та налаштування
+
+1.  Відкрийте у браузері адресу вашого сервера, вказавши порт `9443`: **`https://localhost:9443`** або **`https://<IP-адреса-сервера>:9443`**.
+2.  Оскільки Portainer використовує самопідписаний SSL-сертифікат, ваш браузер покаже **попередження про безпеку**. Натисніть "Продовжити" (Proceed/Advanced -> Accept the risk).
+3.  При першому вході вам буде запропоновано створити **обліковий запис адміністратора**. Придумайте надійний пароль та збережіть його.
+4.  Після створення користувача ви потрапите на головну панель і зможете почати керувати вашим Docker-середовищем.
+
+---
+
+## Ресурси
+
+<LinkCard title="Офіційний сайт" href="https://www.portainer.io/" />
+
