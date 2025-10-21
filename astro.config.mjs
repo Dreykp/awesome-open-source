@@ -11,19 +11,29 @@ export default defineConfig({
             title: 'Open Source Compass',
             defaultLocale: 'uk',
             locales: {
-                // en: {label: 'English'},
+                en: {label: '🇬🇧'},
                 uk: {label: '🇺🇦'}
             },
             social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Dreykp/awesome-open-source' }],
             customCss: ['./src/styles/custom.css'],
             sidebar: [
                 {
-                    label: 'Інструкції',
-                    autogenerate: { directory: 'guides' },
+                    label: 'Вступ',
+                    link: 'structure'
                 },
                 {
                     label: 'Сервіси',
-                    autogenerate: { directory: 'self-hosted-services' },
+                    items: [
+                        {
+                            label: 'Менеджери контейнерів',
+                            items: [
+                                {
+                                    label: 'Portainer',
+                                    link: 'project/portainer',
+                                },
+                            ],
+                        },
+                    ],
                 },{
                     label: 'Додатки',
                     autogenerate: { directory: 'desktop-and-mobile' },

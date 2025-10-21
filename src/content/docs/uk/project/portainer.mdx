@@ -1,21 +1,24 @@
 ---
 title: Portainer
+label: 'Менеджер контейнерів/Portainer'
 description: Легкий веб-інтерфейс для керування Docker
-tags: ["API", "Auth", "v1"]
-links:
-    website: https://www.portainer.io/
-    github: https://github.com/portainer/portainer
-    docker: https://hub.docker.com/r/portainer/portainer-ce
-    docs: https://docs.portainer.io/
+hero:
+    title: 'Portainer'
+    tagline: Спрощення управління Docker та Kubernetes.
+    image:
+        alt: Portainer logo
+        file: ../../../../assets/images/portainer/logo.png
+        width: 200
+        height: 200
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
 import { Steps } from '@astrojs/starlight/components';
 
-import screen0 from '../../../../../assets/screenshots/portainer/0.png';
-import screen1 from '../../../../../assets/screenshots/portainer/1.png';
+import screen0 from '../../../../assets/images/portainer/0.png';
+import screen1 from '../../../../assets/images/portainer/1.png';
 
-import ImageSlider from '../../../../../components/ImageSlider.astro';
+import ImageSlider from '../../../../components/ImageSlider.astro';
 
 **Portainer Community Edition (CE)** — це потужний та легкий веб-інтерфейс з відкритим кодом, який дозволяє легко керувати вашими Docker-середовищами. Замість того, щоб вводити команди в терміналі, ви можете виконувати всі операції через **зручний графічний інтерфейс**.
 
@@ -27,7 +30,7 @@ import ImageSlider from '../../../../../components/ImageSlider.astro';
 ## Основні можливості
 
 * Керування контейнерами, образами, томами (**volumes**) та мережами.
-* Швидкий розгортання додатків за допомогою шаблонів (**App Templates**).
+* Швидке розгортання додатків за допомогою шаблонів (**App Templates**).
 * Перегляд логів та доступ до консолі контейнера прямо з браузера.
 * Керування кількома Docker-хостами з одного інтерфейсу.
 
