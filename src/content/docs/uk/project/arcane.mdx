@@ -1,0 +1,58 @@
+---
+title: Arcane
+label: 'Менеджер контейнерів/Arcane'
+description: arcane
+hero:
+    title: Arcane
+    tagline: Сучасне керування Docker, розроблене для кожного.
+    image:
+        alt: Portainer logo
+        file: ../../../../assets/images/arcane/logo.png
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Опис
+
+[//]: # (<ImageSlider images={[screen0, screen1]} />)
+
+---
+
+## Конфігурація: docker-compose.yml
+
+```yml
+# Arcane Docker Compose Configuration
+# Generated at 10/25/2025, 12:47:18 AM
+
+services:
+  arcane:
+    image: ghcr.io/ofkm/arcane:latest
+    container_name: arcane
+    restart: unless-stopped
+    ports:
+      - 3552:3552
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - arcane-data:/app/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - APP_URL=http://localhost:3552
+      - ENCRYPTION_KEY=5070e6b7b355452651373119e0df280d6a689b4bd0d060b626310da24cf5b1b3
+      - JWT_SECRET=e76ca833b920416e19b9eaba09bf010e67c74f912c2bb7708e766a371153f33c
+      - DATABASE_URL=file:data/arcane.db?_pragma=journal_mode(WAL)&_pragma=busy_timeout(2500)&_txlock=immediate
+
+volumes:
+  arcane-data:
+    driver: local
+```
+
+---
+
+## Ресурси
+
+<LinkCard title="Офіційний сайт" href="https://getarcane.app/" />
+<LinkCard title="Документація" href="https://getarcane.app/docs" />
+<LinkCard title="Вихідний код" href="https://github.com/ofkm/arcane" />
+<LinkCard title="GitHub packages" href="https://github.com/ofkm/arcane/pkgs/container/arcane" />
+

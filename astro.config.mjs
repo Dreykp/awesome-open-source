@@ -2,6 +2,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightThemeGalaxy from 'starlight-theme-galaxy'
+import starlightSidebarTopics from 'starlight-sidebar-topics'
+
+import { sidebarTopics } from './sidebar.config.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,7 +12,8 @@ export default defineConfig({
     base: '/awesome-open-source',
     integrations: [
         starlight({
-            plugins: [starlightThemeGalaxy()],
+            plugins: [starlightThemeGalaxy(), sidebarTopics,
+            ],
             title: 'Open Source Compass',
             defaultLocale: 'uk',
             locales: {
@@ -18,29 +22,6 @@ export default defineConfig({
             },
             social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Dreykp/awesome-open-source' }],
             customCss: ['./src/styles/custom.css'],
-            sidebar: [
-                {
-                    label: 'Вступ',
-                    link: 'structure'
-                },
-                {
-                    label: 'Сервіси',
-                    items: [
-                        {
-                            label: 'Менеджери контейнерів',
-                            items: [
-                                {
-                                    label: 'Portainer',
-                                    link: 'project/portainer',
-                                },
-                            ],
-                        },
-                    ],
-                },{
-                    label: 'Додатки',
-                    autogenerate: { directory: 'desktop-and-mobile' },
-                },
-            ],
         }),
     ],
 });

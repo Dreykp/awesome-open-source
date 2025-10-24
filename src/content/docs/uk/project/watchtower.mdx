@@ -1,0 +1,75 @@
+---
+title: Watchtower
+label: 'Менеджер контейнерів/Watchtower'
+description: watchtower
+hero:
+    title: Watchtower
+    tagline: Автоматизуйте оновлення Docker-образів. Назавжди.
+    image:
+        alt: Portainer logo
+        file: ../../../../assets/images/watchtower/logo.png
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Опис
+
+[//]: # (<ImageSlider images={[screen0, screen1]} />)
+
+---
+
+## Конфігурація: docker-compose.yml
+
+```yml
+services:
+  watchtower:
+    container_name: watchtower
+    build:
+      context: ./
+      dockerfile: dockerfiles/Dockerfile.dev-self-contained
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 8080:8080
+    command: --interval 10 --http-api-metrics --http-api-token demotoken --debug prometheus grafana parent child
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus:/prometheus/
+    ports:
+      - 9090:9090
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    environment:
+      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana:/var/lib/grafana
+      - ./grafana:/etc/grafana/provisioning
+  parent:
+    image: nginx
+    container_name: parent
+  child:
+    image: nginx:alpine
+    labels:
+      com.centurylinklabs.watchtower.depends-on: parent
+    container_name: child
+
+volumes:
+  prometheus: {}
+  grafana: {}
+```
+
+---
+
+## Ресурси
+
+<LinkCard title="Документація" href="https://containrrr.dev/watchtower/" />
+<LinkCard title="Вихідний код" href="https://github.com/containrrr/watchtower" />
+<LinkCard title="GitHub packages" href="https://github.com/containrrr/watchtower/pkgs/container/watchtower" />
+<LinkCard title="Активний форк" href="https://github.com/nicholas-fedor/watchtower" />
+
