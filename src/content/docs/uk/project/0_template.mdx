@@ -1,0 +1,61 @@
+---
+title: test
+label: test
+description: test
+hero:
+    title: 'Portainer'
+    tagline: Спрощення управління Docker та Kubernetes.
+    image:
+        alt: Portainer logo
+        file: ../../../../assets/images/portainer/logo.png
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+[//]: # (import { Steps } from '@astrojs/starlight/components';)
+[//]: # (import ImageSlider from '../../../../components/ImageSlider.astro';)
+
+[//]: # (import screen0 from '../../../../assets/images/portainer/0.png';)
+[//]: # (import screen1 from '../../../../assets/images/portainer/1.png';)
+
+Опис
+
+[//]: # (<ImageSlider images={[screen0, screen1]} />)
+
+---
+
+## Конфігурація: docker-compose.yml
+
+Це базовий та найнадійніший спосіб розгорнути Portainer. Він використовує іменований том для зберігання даних та підключається до сокету Docker на хост-машині.
+
+```yml
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      # 9443 - порт для доступу до веб-інтерфейсу через HTTPS
+      # 8000 - старий порт, залишений для сумісності з агентами
+      - "9443:9443"
+      - "8000:8000"
+    volumes:
+      # Підключаємо сокет Docker, щоб Portainer міг керувати контейнерами
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Створюємо іменований том для зберігання налаштувань Portainer
+      - portainer_data:/data
+    restart: unless-stopped
+
+# Оголошуємо іменований том
+volumes:
+  portainer_data:
+```
+
+---
+
+## Ресурси
+
+<LinkCard title="Офіційний сайт" href="" />
+<LinkCard title="Вихідний код" href="" />
+<LinkCard title="Docher Hub" href="" />
+<LinkCard title="Активний форк" href="" />
+
